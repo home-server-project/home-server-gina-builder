@@ -36,7 +36,8 @@ The personalized ISO still presents all five V1 installation targets:
 - uCore LTS
 - uCore HCI LTS
 
-The selected uCore image is downloaded during installation. **An internet connection is required during the normal installation path.** The Builder does not embed a selected uCore container image into the ISO.
+> [!IMPORTANT]
+> The selected uCore image is downloaded during installation. **An internet connection is required during the normal installation path.** The Builder does not embed a selected uCore container image into the ISO.
 
 ## Build your ISO
 
