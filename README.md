@@ -69,6 +69,17 @@ The personalized ISO still presents all five V1 installation targets:
 > [!IMPORTANT]
 > The selected uCore image is downloaded during installation. **An internet connection is required during the normal installation path.** The Builder does not embed a selected uCore container image into the ISO.
 
+## What to expect when booting and installing
+
+> [!NOTE]
+> **The installer may take a few minutes to appear after booting.** Fedora CoreOS is starting in the background before the Home Server Installer UI launches, so a short wait is normal.
+>
+> During installation, the progress bar may remain around **20% for several minutes** while the selected uCore container image is downloaded, verified, and deployed.
+>
+> **This is expected. Do not power off or reboot the machine while installation is in progress.**
+>
+> Once that stage completes, installation normally advances quickly to completion.
+
 ## Build your ISO
 
 After creating a repository from this template:
