@@ -105,7 +105,11 @@ build-info.txt
 
 The public key is safe to distribute inside your personalized installer ISO. Your **private key stays on your own computer** and is never required by this Builder.
 
-After installation, SSH client key selection still works normally: your local SSH client must have the matching private key available through the SSH agent, a standard identity filename, SSH configuration, or an explicit `ssh -i` option.
+### SSH after installation
+
+- `ssh user@IP` works when the matching private key is available through `ssh-agent`, a normal default SSH identity, or SSH client configuration.
+- If the private key has a custom filename and is not loaded into an agent, use `ssh -i /path/to/private-key user@IP`.
+- After reinstalling a machine at the same IP, the client may need `ssh-keygen -R IP` because a fresh installation generates a new SSH host identity.
 
 ## Safety and current scope
 
