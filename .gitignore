@@ -1,0 +1,7 @@
+# Local editor / OS noise
+.DS_Store
+
+# Local build outputs
+*.iso
+*.sha256
+build-info.txt
