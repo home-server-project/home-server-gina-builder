@@ -163,6 +163,7 @@ jobs:
           EOF
 
       - name: Upload personalized ISO
+        id: upload
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v4
         with:
           name: home-server-ucore-installer-amd64
@@ -172,3 +173,31 @@ jobs:
             build-info.txt
           if-no-files-found: error
           retention-days: 1
+
+      - name: Builder summary
+        shell: bash
+        env:
+          INSTALLER_TAG: ${{ steps.installer_release.outputs.tag }}
+          ARTIFACT_URL: ${{ steps.upload.outputs.artifact-url }}
+        run: |
+          set -euo pipefail
+
+          installer_sha="$(git -C installer rev-parse HEAD)"
+
+          {
+            echo '## Home Server uCore Installer ISO'
+            echo
+            echo "### [Download personalized ISO artifact (.zip)](${ARTIFACT_URL})"
+            echo
+            echo '> The artifact expires after 1 day. Run this workflow again if it has expired.'
+            echo
+            echo "- Installer release: \`${INSTALLER_TAG}\`"
+            echo "- Installer commit: \`${installer_sha}\`"
+            echo '- Fedora CoreOS stream: `stable`'
+            echo '- Architecture: `amd64`'
+            echo '- SSH public key: validated and embedded'
+            echo '- uCore image: selected during installation'
+            echo '- Internet during installation: required'
+            echo
+            echo 'The installer provides all five Home Server/uCore V1 image choices.'
+          } >> "$GITHUB_STEP_SUMMARY"
