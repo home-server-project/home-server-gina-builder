@@ -12,6 +12,36 @@ Build a personalized Home Server Installer ISO in GitHub Actions.
 
 This repository is intended to be used as a GitHub **template repository**. Click **Use this template** to create your own copy, add your SSH public key secret, and build your own ISO without modifying the installer source.
 
+## New to GitHub? Start here
+
+1. Click **Use this template → Create a new repository**.
+2. Choose your GitHub account as the owner, give the repository any name you like, and click **Create repository**.
+3. In your new repository, open **Settings**.
+4. Go to **Secrets and variables → Actions**.
+5. Under **Repository secrets**, click **New repository secret**.
+6. Set:
+   - **Name:** `SSH_PUBLIC_KEY`
+   - **Secret:** paste your full public SSH key, for example `ssh-ed25519 AAAA...`
+7. Click **Add secret**.
+8. Open the **Actions** tab at the top of your repository.
+9. In the left side, select **Build personalized Home Server Installer ISO**.
+10. Click **Run workflow**.
+11. Leave the branch set to **main**, then click the green **Run workflow** button.
+12. Wait for the workflow to show **Success**.
+13. Open the completed workflow run.
+14. In the summary, click **Download personalized ISO artifact (.zip)**.
+
+After extracting the ZIP, you will have:
+
+```text
+home-server-ucore-installer-amd64.iso
+home-server-ucore-installer-amd64.iso.sha256
+build-info.txt
+```
+
+> [!NOTE]
+> The download is kept for 1 day. If it expires, run the workflow again to build a fresh ISO.
+
 ## What the Builder does
 
 When you run **Actions → Build personalized Home Server Installer ISO → Run workflow**, the workflow:
