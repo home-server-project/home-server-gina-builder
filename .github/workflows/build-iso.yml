@@ -84,6 +84,7 @@ jobs:
         uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7
         with:
           go-version-file: installer/go.mod
+          cache-dependency-path: installer/go.sum
           check-latest: true
 
       - name: Build released installer binary
