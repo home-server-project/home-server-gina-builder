@@ -139,7 +139,7 @@ jobs:
             --ssh-key "$SSH_PUBLIC_KEY"
 
           cp output/knuckle-fcos-installer-stable-amd64.iso \
-            ../home-server-ucore-installer-amd64.iso
+            ../home-server-gina-installer-amd64.iso
 
       - name: Create checksum and build information
         shell: bash
@@ -148,12 +148,12 @@ jobs:
         run: |
           set -euo pipefail
 
-          sha256sum home-server-ucore-installer-amd64.iso \
-            > home-server-ucore-installer-amd64.iso.sha256
+          sha256sum home-server-gina-installer-amd64.iso \
+            > home-server-gina-installer-amd64.iso.sha256
 
           installer_sha="$(git -C installer rev-parse HEAD)"
           cat > build-info.txt <<EOF
-          Home Server uCore Builder
+          Home Server Gina Builder
           Installer release: ${INSTALLER_TAG}
           Installer commit: ${installer_sha}
           Fedora CoreOS stream: stable
@@ -166,10 +166,10 @@ jobs:
         id: upload
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v4
         with:
-          name: home-server-ucore-installer-amd64
+          name: home-server-gina-installer-amd64
           path: |
-            home-server-ucore-installer-amd64.iso
-            home-server-ucore-installer-amd64.iso.sha256
+            home-server-gina-installer-amd64.iso
+            home-server-gina-installer-amd64.iso.sha256
             build-info.txt
           if-no-files-found: error
           retention-days: 1
@@ -185,7 +185,7 @@ jobs:
           installer_sha="$(git -C installer rev-parse HEAD)"
 
           {
-            echo '## Home Server uCore Installer ISO'
+            echo '## Home Server Gina Installer ISO'
             echo
             echo "### [Download personalized ISO artifact (.zip)](${ARTIFACT_URL})"
             echo
@@ -196,8 +196,8 @@ jobs:
             echo '- Fedora CoreOS stream: `stable`'
             echo '- Architecture: `amd64`'
             echo '- SSH public key: validated and embedded'
-            echo '- uCore image: selected during installation'
+            echo '- Gina/uCore image: selected during installation'
             echo '- Internet during installation: required'
             echo
-            echo 'The installer provides all five Home Server/uCore V1 image choices.'
+            echo 'The installer provides Home Server Gina and upstream uCore LTS choices.'
           } >> "$GITHUB_STEP_SUMMARY"
