@@ -1,4 +1,4 @@
-# Home Server uCore Builder
+# Home Server Gina Builder
 
 Build a personalized Home Server Installer ISO in GitHub Actions.
 
@@ -34,8 +34,8 @@ This repository is intended to be used as a GitHub **template repository**. Clic
 After extracting the ZIP, you will have:
 
 ```text
-home-server-ucore-installer-amd64.iso
-home-server-ucore-installer-amd64.iso.sha256
+home-server-gina-installer-amd64.iso
+home-server-gina-installer-amd64.iso.sha256
 build-info.txt
 ```
 
@@ -58,23 +58,23 @@ The Builder deliberately follows the latest published installer release rather t
 
 ## Installer choices
 
-The personalized ISO still presents all five V1 installation targets:
+The personalized ISO presents all five V1 installation targets from the current Home Server Installer release:
 
-- Home Server uCore LTS
-- Home Server uCore HCI LTS
+- Home Server Gina LTS
+- Home Server Gina HCI LTS
 - uCore Minimal LTS
 - uCore LTS
 - uCore HCI LTS
 
 > [!IMPORTANT]
-> The selected uCore image is downloaded during installation. **An internet connection is required during the normal installation path.** The Builder does not embed a selected uCore container image into the ISO.
+> The selected Gina/uCore image is downloaded during installation. **An internet connection is required during the normal installation path.** The Builder does not embed a selected container image into the ISO.
 
 ## What to expect when booting and installing
 
 > [!NOTE]
 > **The installer may take a few minutes to appear after booting.** Fedora CoreOS is starting in the background before the Home Server Installer UI launches, so a short wait is normal.
 >
-> During installation, the progress bar may remain around **20% for several minutes** while the selected uCore container image is downloaded, verified, and deployed.
+> During installation, the progress bar may remain around **20% for several minutes** while the selected container image is downloaded, verified, and deployed.
 >
 > **This is expected. Do not power off or reboot the machine while installation is in progress.**
 >
@@ -89,13 +89,13 @@ After creating a repository from this template:
 3. Select **Build personalized Home Server Installer ISO**.
 4. Select **Run workflow**.
 5. Wait for the workflow to finish successfully.
-6. Download the `home-server-ucore-installer-amd64` artifact from the workflow run.
+6. Download the `home-server-gina-installer-amd64` artifact from the workflow run.
 
 The artifact contains:
 
 ```text
-home-server-ucore-installer-amd64.iso
-home-server-ucore-installer-amd64.iso.sha256
+home-server-gina-installer-amd64.iso
+home-server-gina-installer-amd64.iso.sha256
 build-info.txt
 ```
 
@@ -120,7 +120,7 @@ The installer erases and repartitions only the disk selected in the installer UI
 ## Projects
 
 - [Home Server Installer](https://github.com/home-server-project/home-server-installer)
-- [Home Server uCore](https://github.com/home-server-project/home-server-ucore)
+- [Home Server Gina](https://github.com/home-server-project/home-server-gina)
 - [Universal Blue uCore](https://github.com/ublue-os/ucore)
 - [Fedora CoreOS](https://github.com/coreos/fedora-coreos-tracker)
 
