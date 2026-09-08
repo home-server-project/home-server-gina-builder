@@ -124,4 +124,8 @@ The installer erases and repartitions only the disk selected in the installer UI
 - [Universal Blue uCore](https://github.com/ublue-os/ucore)
 - [Fedora CoreOS](https://github.com/coreos/fedora-coreos-tracker)
 
+## License
+
+This Builder repository is licensed under the Apache License 2.0. Software and tooling used by the build process retain their own upstream licenses.
+
 Home Server Project: **Cloud-native technology, brought home.**
