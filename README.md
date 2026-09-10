@@ -4,15 +4,9 @@
 
 # Home Server Gina Builder
 
-Home Server Gina Builder is a GitHub template for creating a personalized, bootable Home Server Installer ISO with your SSH public key.
+Home Server Gina Builder is an optional GitHub template for creating a personalized, bootable [Home Server Installer](https://github.com/home-server-project/home-server-installer) ISO with your SSH public key already embedded.
 
-The ISO is not limited to Gina. After booting it, Home Server Installer can install Home Server Gina, Home Server Gina HCI, or selected upstream Universal Blue uCore LTS images. See [Installer choices](#installer-choices).
-
-## How it fits
-
-- **Gina Builder** creates the personalized bootable ISO.
-- **Home Server Installer** runs from that ISO and handles disk selection and installation.
-- **Home Server Gina or upstream uCore** is the operating-system image you choose during installation.
+If you do not need a personalized ISO, use the ready-to-use ISO published with the [latest Home Server Installer release](https://github.com/home-server-project/home-server-installer/releases/latest).
 
 > [!IMPORTANT]
 > **Before the first build, add a repository Actions secret named `SSH_PUBLIC_KEY`.**
@@ -59,87 +53,54 @@ build-info.txt
 
 </details>
 
-## Installer choices
+## Installer choices and requirements
 
-The personalized ISO uses the current published Home Server Installer release, which supports **11 signed LTS installation targets across four families**.
+The personalized ISO uses the **latest published Home Server Installer release** and provides the same installation choices as that release. Supported Gina/uCore images, installation behavior, storage layout, testing details and current limitations are documented in the [Home Server Installer README](https://github.com/home-server-project/home-server-installer).
 
-<details>
-<summary><strong>Show all 11 installation targets</strong></summary>
-
-### Home Server Gina LTS
-- Home Server Gina LTS
-- Home Server Gina HCI LTS
-
-### Universal Blue uCore LTS
-- uCore Minimal LTS
-- uCore LTS
-- uCore HCI LTS
-
-### Universal Blue uCore LTS / NVIDIA Open
-- uCore Minimal LTS NVIDIA Open
-- uCore LTS NVIDIA Open
-- uCore HCI LTS NVIDIA Open
-
-### Universal Blue uCore LTS / NVIDIA LTS
-- uCore Minimal LTS NVIDIA LTS
-- uCore LTS NVIDIA LTS
-- uCore HCI LTS NVIDIA LTS
-
-</details>
+The selected operating-system image is downloaded during installation, so an internet connection is required for the normal installation path. The Builder does not embed a selected Gina/uCore image into the ISO.
 
 > [!IMPORTANT]
-> The selected Gina/uCore image is downloaded during installation. **An internet connection is required during the normal installation path.** The Builder does not embed a selected operating-system image into the ISO.
-
-## What to expect when booting and installing
-
-> [!NOTE]
-> **The installer may take a few minutes to appear after booting.** Fedora CoreOS is starting in the background before the Home Server Installer UI launches, so a short wait is normal.
->
-> During installation, the progress bar may remain around **20% for several minutes** while the selected image is downloaded, verified, and deployed.
->
-> **This is expected. Do not power off or reboot the machine while installation is in progress.**
->
-> Once that stage completes, installation normally advances quickly to completion.
+> The current Installer V1 path is UEFI-only. **Secure Boot must be disabled during installation**, and the selected target disk is erased and repartitioned.
 
 ## SSH key behavior
 
 `SSH_PUBLIC_KEY` must contain one valid OpenSSH public key. The workflow validates the key before starting the ISO build and refuses to continue if the secret is missing, malformed, contains multiple lines, or appears to contain private-key material.
 
-The public key is safe to distribute inside your personalized installer ISO. Your **private key stays on your own computer** and is never required by this Builder.
+Only the public key is embedded in the personalized ISO. Your **private key stays on your own computer** and is never required by this Builder.
 
-### SSH after installation
+<details>
+<summary><strong>SSH after installation</strong></summary>
 
 - `ssh user@IP` works when the matching private key is available through `ssh-agent`, a normal default SSH identity, or SSH client configuration.
 - If the private key has a custom filename and is not loaded into an agent, use `ssh -i /path/to/private-key user@IP`.
 - After reinstalling a machine at the same IP, the client may need `ssh-keygen -R IP` because a fresh installation generates a new SSH host identity.
 
-## Safety and current scope
+</details>
 
-Home Server Installer V1 is designed for UEFI systems. Secure Boot must be disabled during installation. VM testing is recommended first. For bare-metal testing, use a dedicated test drive or hardware where the selected installation disk can be safely erased, and keep backups of anything important.
-
-The installer erases and repartitions only the disk selected in the installer UI.
-
-## How the Builder works
+<details>
+<summary><strong>How the Builder works</strong></summary>
 
 When you run the build workflow, the Builder:
 
 1. Resolves the **latest published release** of [Home Server Installer](https://github.com/home-server-project/home-server-installer).
 2. Checks out that exact released tag.
 3. Builds the released installer binary.
-4. Builds a Fedora CoreOS-based Home Server Installer ISO.
+4. Builds a fresh Fedora CoreOS-based Home Server Installer ISO using the current Fedora CoreOS stable live image available at build time.
 5. Embeds the public key from your `SSH_PUBLIC_KEY` secret into the live installer handoff.
 6. Produces the ISO, SHA256 checksum and build-information file.
 7. Uploads the finished files as a GitHub Actions artifact retained for **1 day**.
 
 The Builder deliberately follows the latest published Installer release rather than the Installer development branch. A new Installer version is used by the Builder only after it has been published as a GitHub Release.
 
+</details>
+
 ## Upstream and references
 
 <details>
 <summary><strong>Project and upstream links</strong></summary>
 
-- [Home Server Gina](https://github.com/home-server-project/home-server-gina)
 - [Home Server Installer](https://github.com/home-server-project/home-server-installer)
+- [Home Server Gina](https://github.com/home-server-project/home-server-gina)
 - [Home Server Project](https://github.com/home-server-project)
 - [Universal Blue uCore](https://github.com/ublue-os/ucore)
 - [Fedora CoreOS](https://fedoraproject.org/coreos/)
