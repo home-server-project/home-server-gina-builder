@@ -61,13 +61,31 @@ build-info.txt
 
 ## Installer choices
 
-The personalized ISO presents the supported LTS installation targets from the current published Home Server Installer release:
+The personalized ISO uses the current published Home Server Installer release, which supports **11 signed LTS installation targets across four families**.
 
-- **Home Server Gina LTS**
-- **Home Server Gina HCI LTS**
-- **uCore Minimal LTS**
-- **uCore LTS**
-- **uCore HCI LTS**
+<details>
+<summary><strong>Show all 11 installation targets</strong></summary>
+
+### Home Server Gina LTS
+- Home Server Gina LTS
+- Home Server Gina HCI LTS
+
+### Universal Blue uCore LTS
+- uCore Minimal LTS
+- uCore LTS
+- uCore HCI LTS
+
+### Universal Blue uCore LTS / NVIDIA Open
+- uCore Minimal LTS NVIDIA Open
+- uCore LTS NVIDIA Open
+- uCore HCI LTS NVIDIA Open
+
+### Universal Blue uCore LTS / NVIDIA LTS
+- uCore Minimal LTS NVIDIA LTS
+- uCore LTS NVIDIA LTS
+- uCore HCI LTS NVIDIA LTS
+
+</details>
 
 > [!IMPORTANT]
 > The selected Gina/uCore image is downloaded during installation. **An internet connection is required during the normal installation path.** The Builder does not embed a selected operating-system image into the ISO.
